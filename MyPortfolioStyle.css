@@ -1,0 +1,142 @@
+/* ========================= */
+/* CSS */
+/* ========================= */
+
+ body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f1115;
+      color: #eaeaea;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #4da3ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #2d3748;
+      padding-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    .subtitle {
+      color: #9aa4b2;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+    .tags span {
+      display: inline-block;
+      background: #1c1f26;
+      color: #9aa4b2;
+      padding: 8px 14px;
+      margin: 8px 8px 0 0;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      border: 1px solid #2d3748;
+    }
+    a {
+      color: #4da3ff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #8b5cf6;
+      text-decoration: underline;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .project-card {
+      background: #1a1d24;
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid #2d3748;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: #4da3ff;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%; /* 16:9 aspect ratio */
+      height: 0;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .project-description {
+      margin-top: 15px;
+      color: #cbd5e0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .project-meta span {
+      background: #2d3748;
+      color: #9aa4b2;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid #2d3748;
+      color: #777;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    @media (max-width: 768px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
