@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,26 +5,189 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Tolga Asansü | Senior Unity & Unreal XR Developer</title>
   <meta name="description" content="Senior Unity & Unreal XR Developer specializing in AR, MR, VR, mobile AR, and interactive real-time experiences." />
-  
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-EGVTPFHHK9"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
 
-	  gtag('config', 'G-EGVTPFHHK9');
-	</script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EGVTPFHHK9"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-EGVTPFHHK9');
+  </script>
 
-<link rel="stylesheet" href="MyPortfoliostyle.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f1115;
+      color: #eaeaea;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+    h1, h2, h3 {
+      color: #ffffff;
+    }
+    h1 {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, #4da3ff, #8b5cf6);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    h2 {
+      margin-top: 60px;
+      border-bottom: 2px solid #2d3748;
+      padding-bottom: 10px;
+      font-size: 1.8rem;
+    }
+    .subtitle {
+      color: #9aa4b2;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+    .tags span {
+      display: inline-block;
+      background: #1c1f26;
+      color: #9aa4b2;
+      padding: 8px 14px;
+      margin: 8px 8px 0 0;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      border: 1px solid #2d3748;
+    }
+    a {
+      color: #4da3ff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    a:hover {
+      color: #8b5cf6;
+      text-decoration: underline;
+    }
+    .project-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: 30px;
+      margin-top: 30px;
+    }
+    .skill-card {
+      background: #1a1d24;
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid #2d3748;
+    }
+    .skill-list {
+      color: #cbd5e0;
+      padding-left: 18px;
+      margin: 10px 0 0 0;
+    }
+    .skill-list li {
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    .project-card {
+      background: #1a1d24;
+      border-radius: 12px;
+      padding: 25px;
+      border: 1px solid #2d3748;
+      transition: transform 0.3s, border-color 0.3s;
+    }
+    .project-card:hover {
+      transform: translateY(-5px);
+      border-color: #4da3ff;
+    }
+    .video-container {
+      position: relative;
+      width: 100%;
+      padding-bottom: 56.25%;
+      height: 0;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .video-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .img-container {
+      margin-bottom: 20px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .img-container img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .project-description {
+      margin-top: 15px;
+      color: #cbd5e0;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 10px;
+      color: #ffffff;
+    }
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .project-meta span {
+      background: #2d3748;
+      color: #9aa4b2;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.85rem;
+    }
+    footer {
+      margin-top: 80px;
+      padding-top: 20px;
+      border-top: 1px solid #2d3748;
+      color: #777;
+      font-size: 0.9rem;
+      text-align: center;
+    }
+    .contact-info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-top: 15px;
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    @media (max-width: 768px) {
+      .project-grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
   <div class="container">
+
     <header>
       <h1>Tolga Asansü</h1>
       <div class="subtitle">Senior Unity & Unreal XR Developer</div>
       <p>AR / MR / VR • Game & Interactive XR • Mobile & Headset Platforms</p>
-            <div class="tags">
+      <div class="tags">
         <span>Unity</span><span>Unreal Engine</span><span>XR Development</span>
         <span>3D Modeling & Animation</span><span>Video Editing</span><span>Generative AI</span>
         <span>Creative Coding</span><span>Technical Art</span><span>Prototyping</span>
@@ -35,18 +197,17 @@
     <section>
       <h2>Professional Summary</h2>
       <p>
-        Creative Technologist with over 15 years of experience integrating design and technology to build immersive, interactive systems. 
-        Proficient in prototyping innovative concepts using Unity, Blender, Python, and Adobe After Effects. 
-        Skilled in delivering real-time 3D experiences and multimedia installations, with hands-on work across XR, motion graphics, 
-        and creative development tools. Strong collaborator across design and engineering teams with a passion for generative AI, 
+        Creative Technologist with over 15 years of experience integrating design and technology to build immersive, interactive systems.
+        Proficient in prototyping innovative concepts using Unity, Blender, Python, and Adobe After Effects.
+        Skilled in delivering real-time 3D experiences and multimedia installations, with hands-on work across XR, motion graphics,
+        and creative development tools. Strong collaborator across design and engineering teams with a passion for generative AI,
         storytelling, and creative coding.
       </p>
     </section>
 
- <section>
+    <section>
       <h2>Skills</h2>
       <p>My technical and creative skills organized by category:</p>
-      
       <div class="project-grid">
         <div class="skill-card">
           <h3><u>Creative Software</u></h3>
@@ -58,7 +219,6 @@
             <li>ZBrush</li>
           </ul>
         </div>
-        
         <div class="skill-card">
           <h3><u>Programming & Development</u></h3>
           <ul class="skill-list">
@@ -70,7 +230,6 @@
             <li>Raspberry Pi</li>
           </ul>
         </div>
-        
         <div class="skill-card">
           <h3><u>Game & XR Engines</u></h3>
           <ul class="skill-list">
@@ -79,7 +238,6 @@
             <li>XR Development (AR/VR/MR)</li>
           </ul>
         </div>
-        
         <div class="skill-card">
           <h3><u>Generative AI Tools</u></h3>
           <ul class="skill-list">
@@ -88,7 +246,6 @@
             <li>ChatGPT (prototyping support)</li>
           </ul>
         </div>
-        
         <div class="skill-card">
           <h3><u>Video & Motion Production</u></h3>
           <ul class="skill-list">
@@ -99,7 +256,6 @@
             <li>Rigging for real-time engines</li>
           </ul>
         </div>
-        
         <div class="skill-card">
           <h3><u>Soft Skills</u></h3>
           <ul class="skill-list">
@@ -112,193 +268,142 @@
         </div>
       </div>
     </section>
-	
+
     <section>
       <h2>Featured XR & Game Projects</h2>
       <p>Here are some of my recent XR projects with video demonstrations and detailed descriptions:</p>
-      
-		<div class="project-grid">
+      <div class="project-grid">
 
-		<!-- Demoreel -->
-		<div class="project-card">
-		<div class="project-title">2017 XR Projects Demoreel</div>
-		<div class="video-container">
-		<iframe src="https://www.youtube.com/embed/PJMK_NK3RdA?si=pxXq6aSnzMziKGfi" 
-                    title="M2017 XR Projects Demoreel" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-		</div>
-		<div class="project-description">
-		<b>Context:</b> Delivered multiple XR showcase applications for IDEF while working at GFDS.<br><br>
-		<b>Challenge:</b> Clients needed realistic interactive demos despite limited access to physical military hardware and noisy exhibition conditions.<br><br>
-		<b>Solution:</b> Built Unity VR mockups, real-time AR vehicle visualization with OpenCV background subtraction, and an iOS AR app with live screen sharing.<br><br>
-		<b>Result:</b> All systems were successfully deployed at IDEF, enabling clients to present complex products interactively.
-		</div>
-		<div class="project-meta"><span>Unity</span><span>C#</span><span>VR</span><span>AR</span></div>
-		</div>
+        <div class="project-card">
+          <div class="project-title">2017 XR Projects Demoreel</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/PJMK_NK3RdA?si=pxXq6aSnzMziKGfi" title="2017 XR Projects Demoreel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="project-description">
+            <b>Context:</b> Delivered multiple XR showcase applications for IDEF while working at GFDS.<br><br>
+            <b>Challenge:</b> Clients needed realistic interactive demos despite limited access to physical military hardware and noisy exhibition conditions.<br><br>
+            <b>Solution:</b> Built Unity VR mockups, real-time AR vehicle visualization with OpenCV background subtraction, and an iOS AR app with live screen sharing.<br><br>
+            <b>Result:</b> All systems were successfully deployed at IDEF, enabling clients to present complex products interactively.
+          </div>
+          <div class="project-meta"><span>Unity</span><span>C#</span><span>VR</span><span>AR</span></div>
+        </div>
 
-		<!-- Hypercasual -->
-		<div class="project-card">
-		<div class="project-title">HyperCasual Game Prototype</div>
-		<div class="video-container">
-		<iframe src="https://www.youtube.com/embed/LQsaBVInfiQ?si=5ge2OFPNhXyJ9Aky" 
-							title="HyperCasual Game Prototype" 
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-							allowfullscreen></iframe>
-		</div>
-		<div class="project-description">
-		<b>Context:</b> Personal rapid-prototyping exercise to validate hypercasual mechanics.<br><br>
-		<b>Challenge:</b> Avoid manual level creation while keeping gameplay scalable and performant.<br><br>
-		<b>Solution:</b> Built full Unity prototype with procedural level generation, prefab-based spawning outside camera view, and dynamic difficulty scaling tied to player score.<br><br>
-		<b>Result:</b> Fully playable prototype completed in 3–4 hours demonstrating fast iteration capability.
-		</div>
-		<div class="project-meta"><span>Blender</span><span>Unity</span><span>C#</span><span>Procedural</span></div>
-		</div>
+        <div class="project-card">
+          <div class="project-title">HyperCasual Game Prototype</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/LQsaBVInfiQ?si=5ge2OFPNhXyJ9Aky" title="HyperCasual Game Prototype" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="project-description">
+            <b>Context:</b> Personal rapid-prototyping exercise to validate hypercasual mechanics.<br><br>
+            <b>Challenge:</b> Avoid manual level creation while keeping gameplay scalable and performant.<br><br>
+            <b>Solution:</b> Built full Unity prototype with procedural level generation, prefab-based spawning outside camera view, and dynamic difficulty scaling tied to player score.<br><br>
+            <b>Result:</b> Fully playable prototype completed in 3–4 hours demonstrating fast iteration capability.
+          </div>
+          <div class="project-meta"><span>Blender</span><span>Unity</span><span>C#</span><span>Procedural</span></div>
+        </div>
 
-		<!-- ATAK -->
-		<div class="project-card">
-		<div class="project-title">TAI ATAK Helicopter Simulation Demo</div>
-		<div class="video-container">
-		<iframe src="https://www.dropbox.com/scl/fi/0bozkcm5hgwgr0zekue4g/atakdemofinal.mp4?rlkey=ukk16th7t98911q4jrrozlk4o&st=qwrtjfw9&raw=1&dl=0" 
-                    title="TAI ATAK Helicopter Simulation Demo" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-		</div>
-		<div class="project-description">
-		<b>Context:</b> Visualization demo prepared at GFDS for TUSAŞ helicopter presentation.<br><br>
-		<b>Challenge:</b> Required high visual fidelity in Unreal Engine despite no prior production experience with the engine.<br><br>
-		<b>Solution:</b> Rapidly onboarded to Unreal, built environment, integrated helicopter assets, and prepared real-time presentation flow.<br><br>
-		<b>Result:</b> Delivered a convincing real-time showcase demonstrating Unreal simulation capability.
-		</div>
-		<div class="project-meta"><span>Unreal</span><span>VR</span></div>
-		</div>
+        <div class="project-card">
+          <div class="project-title">TAI ATAK Helicopter Simulation Demo</div>
+          <div class="video-container">
+            <iframe src="https://www.dropbox.com/scl/fi/0bozkcm5hgwgr0zekue4g/atakdemofinal.mp4?rlkey=ukk16th7t98911q4jrrozlk4o&st=qwrtjfw9&raw=1&dl=0" title="TAI ATAK Helicopter Simulation Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="project-description">
+            <b>Context:</b> Visualization demo prepared at GFDS for TUSAŞ helicopter presentation.<br><br>
+            <b>Challenge:</b> Required high visual fidelity in Unreal Engine despite no prior production experience with the engine.<br><br>
+            <b>Solution:</b> Rapidly onboarded to Unreal, built environment, integrated helicopter assets, and prepared real-time presentation flow.<br><br>
+            <b>Result:</b> Delivered a convincing real-time showcase demonstrating Unreal simulation capability.
+          </div>
+          <div class="project-meta"><span>Unreal</span><span>VR</span></div>
+        </div>
 
-		<!-- HoloLens -->
-		<div class="project-card">
-		<div class="project-title">HoloLens CSI Training Application</div>
-		<div class="video-container">
-		<iframe src="https://www.youtube.com/embed/8wqOp-hBKbo?si=iJnjc84bht3c4Mcm" 
-                    title="HoloLens CSI Training Application" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-		</div>
-		<div class="project-description">
-		<b>Context:</b> Mixed-reality crime scene training prototype developed at HAVELSAN.<br><br>
-		<b>Challenge:</b> Needed stable spatial placement and optional multi-user readiness for training scenarios.<br><br>
-		<b>Solution:</b> Built MR scene in Unity, modeled props, implemented spatial anchors, and prepared collaborative workflow.<br><br>
-		<b>Result:</b> Prototype validated MR-based training workflows for defense use cases.
-		</div>
-		<div class="project-meta"><span>HoloLens</span><span>Unity</span><span>MR</span><span>C#</span><span>Photoshop</span></div>
-		</div>
-		
-		<!-- AR Framework -->
-		<div class="project-card">
-		<div class="project-title">Custom AR Framework Demo</div>
-		<div class="video-container">
-		<iframe src="https://www.youtube.com/embed/vNhl_J-H4dc?si=AnZHRB_zr0o45K2U" 
-                    title="Custom AR Framework Demo" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-		</div>
-		<div class="project-description">
-		<b>Context:</b> Showcase project for internal AR framework and Unity plugin.<br><br>
-		<b>Challenge:</b> Initial scene suffered from real-time performance issues.<br><br>
-		<b>Solution:</b> Developed Unity plugin and optimized rendering using compute-shader-based improvements.<br><br>
-		<b>Result:</b> Achieved stable real-time performance and validated the framework architecture.
-		</div>
-		<div class="project-meta"><span>Unity</span><span>AR</span><span>Compute Shaders</span><span>C#</span><span>C++</span><span>GLSL</span></div>
-		</div>
-		
-		<!-- Project 8 -->
+        <div class="project-card">
+          <div class="project-title">HoloLens CSI Training Application</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/8wqOp-hBKbo?si=iJnjc84bht3c4Mcm" title="HoloLens CSI Training Application" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="project-description">
+            <b>Context:</b> Mixed-reality crime scene training prototype developed at HAVELSAN.<br><br>
+            <b>Challenge:</b> Needed stable spatial placement and optional multi-user readiness for training scenarios.<br><br>
+            <b>Solution:</b> Built MR scene in Unity, modeled props, implemented spatial anchors, and prepared collaborative workflow.<br><br>
+            <b>Result:</b> Prototype validated MR-based training workflows for defense use cases.
+          </div>
+          <div class="project-meta"><span>HoloLens</span><span>Unity</span><span>MR</span><span>C#</span><span>Photoshop</span></div>
+        </div>
+
+        <div class="project-card">
+          <div class="project-title">Custom AR Framework Demo</div>
+          <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/vNhl_J-H4dc?si=AnZHRB_zr0o45K2U" title="Custom AR Framework Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="project-description">
+            <b>Context:</b> Showcase project for internal AR framework and Unity plugin.<br><br>
+            <b>Challenge:</b> Initial scene suffered from real-time performance issues.<br><br>
+            <b>Solution:</b> Developed Unity plugin and optimized rendering using compute-shader-based improvements.<br><br>
+            <b>Result:</b> Achieved stable real-time performance and validated the framework architecture.
+          </div>
+          <div class="project-meta"><span>Unity</span><span>AR</span><span>Compute Shaders</span><span>C#</span><span>C++</span><span>GLSL</span></div>
+        </div>
+
         <div class="project-card">
           <div class="project-title">Casual Mobile Game</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/ZUWYXzKMLqI?si=9fisNYF_zvx-RLoI" 
-                    title="Casual Mobile Game" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/ZUWYXzKMLqI?si=9fisNYF_zvx-RLoI" title="Casual Mobile Game" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Published casual mobile game on Google Play Store, contributing as Technical Artist with shader development and asset optimization.
+            Published casual mobile game on Google Play Store, contributing as Technical Artist with shader development and asset optimization.
           </div>
-          <div class="project-meta">
-            <span>Blender</span><span>Unity</span><span>C#</span><span>GLSL</span><span>Photoshop</span>
-          </div>
+          <div class="project-meta"><span>Blender</span><span>Unity</span><span>C#</span><span>GLSL</span><span>Photoshop</span></div>
         </div>
-		
-		<!-- Project 9 -->
+
         <div class="project-card">
           <div class="project-title">Jet Aircraft Modeling & Rigging</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/poCeSGAT0ok?si=uciZw1JYo9ens0Er" 
-                    title="Jet Aircraft Modeling & Rigging" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/poCeSGAT0ok?si=uciZw1JYo9ens0Er" title="Jet Aircraft Modeling & Rigging" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Complete 3D modeling and rigging of jet aircraft for AR training applications, demonstrating technical art skills for educational content.
+            Complete 3D modeling and rigging of jet aircraft for AR training applications, demonstrating technical art skills for educational content.
           </div>
-          <div class="project-meta">
-            <span>Blender</span>
-          </div>
+          <div class="project-meta"><span>Blender</span></div>
         </div>
-		
-		
-		<!-- Project 12 -->
+
         <div class="project-card">
           <div class="project-title">Game Clone Challenge</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/wAmHMcwQY5E?si=zMwPc9GbGT-OhYzn" 
-                    title="Game Clone Challenge" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/wAmHMcwQY5E?si=zMwPc9GbGT-OhYzn" title="Game Clone Challenge" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Technical challenge recreating first 20 levels of Voodoo's "This is Blast" game, demonstrating rapid prototyping and multi-software proficiency.
+            Technical challenge recreating first 20 levels of Voodoo's "This is Blast" game, demonstrating rapid prototyping and multi-software proficiency.
           </div>
-          <div class="project-meta">
-            <span>Blender</span><span>Unity</span><span>C#</span><span>Photoshop</span><span>After Effects</span>
-          </div>
+          <div class="project-meta"><span>Blender</span><span>Unity</span><span>C#</span><span>Photoshop</span><span>After Effects</span></div>
         </div>
-		
-		<!-- Project 13 -->
+
         <div class="project-card">
           <div class="project-title">Reo-Tek Projects</div>
           <div class="video-container">
-            <iframe src="https://www.dropbox.com/scl/fi/jbgdmio81mdufne6ft8ql/ReoTek.mp4?rlkey=us9wvbwueg6mrrfq9lz2c7rz9&st=wr86s4a6&raw=1&dl=0" 
-                    title="Reo-Tek Projects" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.dropbox.com/scl/fi/jbgdmio81mdufne6ft8ql/ReoTek.mp4?rlkey=us9wvbwueg6mrrfq9lz2c7rz9&st=wr86s4a6&raw=1&dl=0" title="Reo-Tek Projects" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Some of the projects I have worked on during my tenure in Reo-Tek.
+            Some of the projects I have worked on during my tenure in Reo-Tek.
           </div>
-          <div class="project-meta">
-            <span>Blender</span><span>Unity</span><span>C#</span><span>Photoshop</span><span>Kinect</span><span>Android</span><span>IOS</span><span>Realsense</span>
-          </div>
+          <div class="project-meta"><span>Blender</span><span>Unity</span><span>C#</span><span>Photoshop</span><span>Kinect</span><span>Android</span><span>iOS</span><span>Realsense</span></div>
         </div>
-		
-		<!-- Multiuser VR -->
-		<div class="project-card">
-		<div class="project-title">Multi-user VR Simulation Demo</div>
-		<div class="video-container">
-		<iframe src="https://www.dropbox.com/scl/fi/21rppc6nu6fbxzvb5knrh/Multiairsim-1.mp4?rlkey=0c2pmxyln33fd33fmzxvevzri&st=bmo97hf3&raw=1&dl=0" 
-                    title="Multi-user VR Simulation Demo" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-		</div>
-		<div class="project-description">
-		<b>Context:</b> Networked VR simulation prototype built in Unity.<br><br>
-		<b>Challenge:</b> Synchronize multiple users in the same virtual environment with stable interactions.<br><br>
-		<b>Solution:</b> Implemented Netcode-based multiplayer structure, designed VR interactions, and optimized scene setup.<br><br>
-		<b>Result:</b> Demonstrated reliable multi-user VR experience suitable for simulation scenarios.
-		</div>
-		<div class="project-meta"><span>Unity</span><span>Netcode</span><span>VR</span><span>3DS Max</span><span>Photoshop</span></div>
-		</div>
 
+        <div class="project-card">
+          <div class="project-title">Multi-user VR Simulation Demo</div>
+          <div class="video-container">
+            <iframe src="https://www.dropbox.com/scl/fi/21rppc6nu6fbxzvb5knrh/Multiairsim-1.mp4?rlkey=0c2pmxyln33fd33fmzxvevzri&st=bmo97hf3&raw=1&dl=0" title="Multi-user VR Simulation Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="project-description">
+            <b>Context:</b> Networked VR simulation prototype built in Unity.<br><br>
+            <b>Challenge:</b> Synchronize multiple users in the same virtual environment with stable interactions.<br><br>
+            <b>Solution:</b> Implemented Netcode-based multiplayer structure, designed VR interactions, and optimized scene setup.<br><br>
+            <b>Result:</b> Demonstrated reliable multi-user VR experience suitable for simulation scenarios.
+          </div>
+          <div class="project-meta"><span>Unity</span><span>Netcode</span><span>VR</span><span>3DS Max</span><span>Photoshop</span></div>
+        </div>
 
-        <!-- Add more project cards as needed -->
       </div>
+    </section>
 
     <section>
       <h2>Technical Art & 3D</h2>
@@ -306,215 +411,143 @@
         Alongside development, I work extensively with technical art pipelines including 3D modeling, animation, shaders,
         textures, and UI/UX for real-time engines.
       </p>
-	  
-	        <div class="project-grid">
-        <!-- Project 1 -->
+      <div class="project-grid">
+
         <div class="project-card">
           <div class="project-title">Earth Rotation Animation</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/Ij3tl3CPkbI?si=ZBO1zSQZ8Ka0mGSn" 
-                    title="Earth Rotation Animation" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/Ij3tl3CPkbI?si=ZBO1zSQZ8Ka0mGSn" title="Earth Rotation Animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
             Custom animated opening sequence created using After Effects. Responsible for animation, editing, and visual effects.
           </div>
-          <div class="project-meta">
-            <span>After Effects</span>
-          </div>
+          <div class="project-meta"><span>After Effects</span></div>
         </div>
-		
-		<!-- Project 2 -->
+
         <div class="project-card">
           <div class="project-title">DVD Player Mechanism Animation</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/N-5YO4J5sig?si=Os4cUYwRwGEm9yrd" 
-                    title="DVD Player Mechanism Animation" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/N-5YO4J5sig?si=Os4cUYwRwGEm9yrd" title="DVD Player Mechanism Animation" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Technical animation explaining DVD player mechanics for TRT's educational program "How It Works." Created using 3ds Max and After Effects.
+            Technical animation explaining DVD player mechanics for TRT's educational program "How It Works." Created using 3ds Max and After Effects.
           </div>
-          <div class="project-meta">
-            <span>3DS Max</span><span>After Effects</span>
-          </div>
+          <div class="project-meta"><span>3DS Max</span><span>After Effects</span></div>
         </div>
-		
-				<!-- Project 10 -->
+
         <div class="project-card">
           <div class="project-title">Digital Portrait Sculpting</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/cvLQHMmQlM4?si=rzdMiNjktoTkReci" 
-                    title="Digital Portrait Sculpting" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/cvLQHMmQlM4?si=rzdMiNjktoTkReci" title="Digital Portrait Sculpting" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Digital sculpting exercise focusing on facial likeness creation using ZBrush, demonstrating advanced character modeling techniques.
+            Digital sculpting exercise focusing on facial likeness creation using ZBrush, demonstrating advanced character modeling techniques.
           </div>
-          <div class="project-meta">
-            <span>ZBrush</span>
-          </div>
+          <div class="project-meta"><span>ZBrush</span></div>
         </div>
-		
-		<!-- Project 11 -->
+
         <div class="project-card">
           <div class="project-title">Amphibian Kat TurnTable</div>
           <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/dQKNoShCK-k?si=JU8zPBj2d0qYvOOI" 
-                    title="Amphibian Kat TurnTable" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/dQKNoShCK-k?si=JU8zPBj2d0qYvOOI" title="Amphibian Kat TurnTable" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Original amphibious character design and modeling in ZBrush, showcasing creature design and digital sculpting skills.
+            Original amphibious character design and modeling in ZBrush, showcasing creature design and digital sculpting skills.
           </div>
-          <div class="project-meta">
-            <span>ZBrush</span>
-          </div>
+          <div class="project-meta"><span>ZBrush</span></div>
         </div>
-    
-	
-	<!-- Project 14 -->
+
         <div class="project-card">
-		  <div class="project-title">Automobile Showcase</div>
+          <div class="project-title">Automobile Showcase</div>
+          <div class="img-container">
+            <img src="https://www.dropbox.com/scl/fi/1jsaere5vm7e30xuy73lr/Unreal_Kia2.png?rlkey=v6xcuhae4gmd2ax2vszpiwcgf&st=gjnj1omo&raw=1&dl=0" alt="Automobile Showcase" />
+          </div>
+          <div class="project-description">
+            Showcase of an automobile in Unreal.
+          </div>
+          <div class="project-meta"><span>Unreal</span></div>
+        </div>
 
-		  <div class="img-container">
-			<img
-			  src="https://www.dropbox.com/scl/fi/1jsaere5vm7e30xuy73lr/Unreal_Kia2.png?rlkey=v6xcuhae4gmd2ax2vszpiwcgf&st=gjnj1omo&raw=1&dl=0"
-			  alt="Automobile Showcase"
-			  style="max-width:100%; height:auto; display:block; margin:0 auto;"
-			>
-		  </div>
-
-		  <div class="project-description">
-			Showcase of an automobile in Unreal.
-		  </div>
-
-		  <div class="project-meta">
-			<span>Unreal</span>
-		  </div>
-		</div>
-	</section>
-	
-		<!-- Project 15 -->
         <div class="project-card">
-		  <div class="project-title">VR environment</div>
+          <div class="project-title">VR Environment</div>
+          <div class="img-container">
+            <img src="https://www.dropbox.com/scl/fi/i471pvki31vu1w2hs7l9v/Unreal_Quest2_LevelDesign3.jpeg?rlkey=p2rpkb86o2gg1bb8103ait2di&st=hmyvxfxg&dl=0" alt="VR Environment" />
+          </div>
+          <div class="project-description">
+            Level design in Unreal.
+          </div>
+          <div class="project-meta"><span>Unreal</span></div>
+        </div>
 
-		  <div class="img-container">
-			<img
-			  src="https://www.dropbox.com/scl/fi/i471pvki31vu1w2hs7l9v/Unreal_Quest2_LevelDesign3.jpeg?rlkey=p2rpkb86o2gg1bb8103ait2di&st=hmyvxfxg&dl=0"
-			  alt="VR environment"
-			  style="max-width:100%; height:auto; display:block; margin:0 auto;"
-			>
-		  </div>
-
-		  <div class="project-description">
-			Level design in Unreal.
-		  </div>
-
-		  <div class="project-meta">
-			<span>Unreal</span>
-		  </div>
-		</div>
-	</section>
-	
-			<!-- Project 16 -->
         <div class="project-card">
           <div class="project-title">Earth Zoomin</div>
           <div class="video-container">
-            <iframe src="https://www.dropbox.com/scl/fi/kh2f6qp9ujt5uc31a4jcu/Earthrender.mp4?rlkey=11l1xe5690hjkj8i3x3i5eqbp&st=3d5eznvv&raw=1&dl=0" 
-                    title="Earth Zoom-in" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.dropbox.com/scl/fi/kh2f6qp9ujt5uc31a4jcu/Earthrender.mp4?rlkey=11l1xe5690hjkj8i3x3i5eqbp&st=3d5eznvv&raw=1&dl=0" title="Earth Zoom-in" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           Intro for a VR Project.
+            Intro for a VR Project.
           </div>
-          <div class="project-meta">
-            <span>After Effects</span><span>Photoshop</span>
-          </div>
+          <div class="project-meta"><span>After Effects</span><span>Photoshop</span></div>
         </div>
-		
-				<!-- Project 17 -->
-		  <div class="project-card">
+
+        <div class="project-card">
           <div class="project-title">F16 VR Havelsan Intro</div>
           <div class="video-container">
-            <iframe src="https://www.dropbox.com/scl/fi/v7fztm5vr4nj9ylqekqk7/F16-Edit-Vr2-Output-1.mp4?rlkey=2apt85juaostulrz0tlknvzga&st=wnsz7ghv&raw=1&dl=0" 
-                    title="F16 VR Havelsan Intro" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.dropbox.com/scl/fi/v7fztm5vr4nj9ylqekqk7/F16-Edit-Vr2-Output-1.mp4?rlkey=2apt85juaostulrz0tlknvzga&st=wnsz7ghv&raw=1&dl=0" title="F16 VR Havelsan Intro" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           VR Video editting.
+            VR Video editing.
           </div>
-          <div class="project-meta">
-            <span>After Effects</span><span>Photoshop</span>
-          </div>
+          <div class="project-meta"><span>After Effects</span><span>Photoshop</span></div>
         </div>
-		
-				<!-- Project 18 -->
-		<div class="project-card">
+
+        <div class="project-card">
           <div class="project-title">Harf CSI UI</div>
           <div class="video-container">
-            <iframe src="https://www.dropbox.com/scl/fi/rshfyfp809d3cwml7559d/HARFCSI_UI.mp4?rlkey=r7fnvgy81odo43ujpwn7ejcno&st=9g26hb9t&raw=1&dl=0" 
-                    title="Harf CSI UI" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
+            <iframe src="https://www.dropbox.com/scl/fi/rshfyfp809d3cwml7559d/HARFCSI_UI.mp4?rlkey=r7fnvgy81odo43ujpwn7ejcno&st=9g26hb9t&raw=1&dl=0" title="Harf CSI UI" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
           </div>
           <div class="project-description">
-           UI Design for a VR Project.
+            UI Design for a VR Project.
           </div>
-          <div class="project-meta">
-            <span>After Effects</span><span>Photoshop</span>
-          </div>
+          <div class="project-meta"><span>After Effects</span><span>Photoshop</span></div>
         </div>
-	
+
+      </div>
+    </section>
+
     <section>
       <h2>Contact</h2>
       <div class="contact-info">
         <div class="contact-item">📍 Germany</div>
         <div class="contact-item">📧 tolgaasansu@gmail.com</div>
-        <div class="contact-item">
-          🔗 <a href="https://www.linkedin.com/in/tolga-asansu/" target="_blank">LinkedIn</a>
-        </div>
-		<div class="contact-item">
-          🔗 <a href="https://cara.app/mimesis" target="_blank">Cara Portfolio</a>
-        </div>
+        <div class="contact-item">🔗 <a href="https://www.linkedin.com/in/tolga-asansu/" target="_blank">LinkedIn</a></div>
+        <div class="contact-item">🔗 <a href="https://cara.app/mimesis" target="_blank">Cara Portfolio</a></div>
       </div>
     </section>
 
     <footer>
       <p>© Tolga Asansü – XR Game & Interactive Developer</p>
       <p style="font-size: 0.8rem; margin-top: 10px; color: #9aa4b2;">
-        Portfolio built with GitHub Pages • Last updated: 2024
+        Portfolio built with GitHub Pages • Last updated: 2026
       </p>
     </footer>
+
   </div>
 
   <script>
-    // Prevent right-click on videos (optional)
     document.addEventListener('contextmenu', event => {
       if (event.target.tagName === 'IFRAME') {
         event.preventDefault();
       }
     });
-
-    // Add smooth scrolling for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function (e) {
         e.preventDefault();
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;
-        
         const targetElement = document.querySelector(targetId);
         if (targetElement) {
-          window.scrollTo({
-            top: targetElement.offsetTop - 20,
-            behavior: 'smooth'
-          });
+          window.scrollTo({ top: targetElement.offsetTop - 20, behavior: 'smooth' });
         }
       });
     });
