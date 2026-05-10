@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sihirli Pizza Restoranı</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#fff9f0;min-height:100vh;display:flex;align-items:flex-start;justify-content:center;padding:16px;}
+#app{width:100%;max-width:680px;}
+
+/* SCREENS */
+.scr{display:none;} .scr.on{display:block;}
+
+/* MENU */
+#menu-wrap{background:#fff8f0;border:2px solid #ffd4b0;border-radius:20px;padding:28px 20px;text-align:center;margin-top:12px;}
+.m-logo{font-size:56px;margin-bottom:8px;}
+.m-title{font-size:26px;font-weight:700;color:#c0440a;margin-bottom:6px;}
+.m-sub{font-size:14px;color:#a0522d;margin-bottom:20px;line-height:1.5;}
+.lang-row{display:flex;gap:10px;justify-content:center;margin-bottom:16px;}
+.lbtn{padding:7px 22px;border-radius:20px;border:2px solid #e0e0e0;background:#f5f5f5;font-size:13px;font-weight:600;cursor:pointer;color:#555;transition:all .15s;}
+.lbtn.on{background:#ff6b35;border-color:#ff6b35;color:#fff;}
+.diff-label{font-size:13px;font-weight:600;color:#a0522d;text-align:left;margin-bottom:8px;}
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px;}
+.diff-card{background:#fff;border:2px solid #ffd4b0;border-radius:14px;padding:14px 8px;cursor:pointer;transition:all .15s;}
+.diff-card:hover{transform:translateY(-2px);border-color:#ff8c42;}
+.diff-card.sel{border-color:#ff6b35;background:#fff0e0;}
+.diff-card .di{font-size:28px;margin-bottom:4px;}
+.diff-card .dn{font-size:13px;font-weight:700;color:#c0440a;}
+.diff-card .dd{font-size:11px;color:#a0522d;margin-top:3px;line-height:1.4;}
+.go-btn{background:#ff6b35;color:#fff;border:none;border-radius:14px;padding:14px;font-size:16px;font-weight:700;cursor:pointer;width:100%;transition:all .15s;}
+.go-btn:hover{background:#e85a25;}
+
+/* HUD */
+#hud{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.hud-box{background:#fff8f0;border:1.5px solid #ffd4b0;border-radius:10px;padding:5px 12px;font-size:13px;font-weight:600;color:#c0440a;}
+.hud-box.score{flex:1;}
+.lives{display:flex;gap:3px;align-items:center;}
+.heart{font-size:20px;transition:all .3s;}
+.heart.lost{filter:grayscale(1);opacity:.3;}
+#penalty-wrap{margin-bottom:10px;}
+#penalty-label{font-size:11px;color:#e53935;margin-bottom:3px;font-weight:600;}
+#penalty-bar{width:100%;height:6px;background:#f0f0f0;border-radius:4px;overflow:hidden;}
+#penalty-fill{height:100%;background:#e53935;border-radius:4px;transition:width .5s;width:0%;}
+
+/* FLOOR */
+#floor{display:grid;gap:10px;margin-bottom:12px;}
+.fl4{grid-template-columns:repeat(2,1fr);}
+.fl6{grid-template-columns:repeat(3,1fr);}
+.fl8{grid-template-columns:repeat(4,1fr);}
+
+.table-card{background:#fff;border:2px solid #ffd4b0;border-radius:16px;padding:10px 8px;min-height:120px;position:relative;transition:border-color .3s,background .3s;cursor:default;}
+.table-card.empty{border-color:#f5c6c6;background:#fff8f8;}
+.table-card.waiting{border-color:#ffe082;}
+.table-card.angry{border-color:#ef9a9a;background:#fff5f5;}
+.table-card.answered{border-color:#a5d6a7;background:#f5fff7;}
+.table-card.waiting:hover,.table-card.angry:hover{cursor:pointer;filter:brightness(.97);}
+
+.t-num{font-size:10px;color:#ccc;position:absolute;top:5px;left:7px;}
+.t-char{font-size:28px;text-align:center;line-height:1.2;}
+.t-name{font-size:11px;font-weight:700;color:#c0440a;text-align:center;margin-bottom:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.t-q{font-size:10px;color:#666;text-align:center;line-height:1.35;margin-bottom:5px;min-height:28px;}
+.t-timer{height:4px;border-radius:2px;background:#f0f0f0;overflow:hidden;margin-bottom:5px;}
+.t-timer-fill{height:100%;border-radius:2px;transition:width .4s,background .4s;}
+.t-empty-label{font-size:11px;color:#e57373;text-align:center;font-weight:700;margin-top:8px;}
+.t-penalty{font-size:10px;color:#e53935;text-align:center;}
+.t-done{font-size:22px;text-align:center;margin-top:4px;}
+.t-btn{background:#ff6b35;color:#fff;border:none;border-radius:8px;padding:4px 8px;font-size:11px;cursor:pointer;width:100%;font-weight:700;margin-top:2px;}
+.t-btn:hover{background:#e85a25;}
+.t-angry-badge{font-size:9px;color:#c62828;font-weight:700;text-align:center;margin-bottom:2px;}
+
+/* QUEUE */
+#queue-wrap{background:#fff8f0;border:1.5px solid #ffd4b0;border-radius:14px;padding:10px 14px;margin-bottom:12px;}
+.q-label{font-size:12px;color:#a0522d;margin-bottom:6px;font-weight:600;}
+#queue-row{display:flex;gap:6px;flex-wrap:wrap;min-height:36px;align-items:center;}
+.q-person{background:#fff;border:1.5px solid #ffd4b0;border-radius:10px;padding:5px 10px;font-size:11px;color:#c0440a;display:flex;align-items:center;gap:5px;cursor:pointer;transition:all .15s;font-weight:600;}
+.q-person:hover{background:#fff0e0;border-color:#ff8c42;transform:scale(1.04);}
+.q-person .qi{font-size:18px;}
+
+/* QUEUE DECISION */
+#q-decision{display:none;background:#e8f5e9;border:2px solid #a5d6a7;border-radius:14px;padding:14px;margin-bottom:12px;}
+#q-decision.on{display:block;}
+.qd-title{font-size:13px;font-weight:700;color:#2e7d32;margin-bottom:6px;}
+.qd-q{font-size:13px;color:#333;margin-bottom:8px;line-height:1.5;}
+.qd-visual{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:8px;background:#f1fff3;border-radius:10px;margin-bottom:10px;min-height:40px;}
+.qd-row{display:flex;align-items:center;gap:8px;}
+.qd-in{width:64px;text-align:center;font-size:22px;font-weight:700;padding:6px;border:2px solid #a5d6a7;border-radius:10px;background:#fff;color:#2e7d32;outline:none;}
+.qd-in:focus{border-color:#4caf50;}
+.qd-btn{background:#4caf50;color:#fff;border:none;border-radius:10px;padding:8px 18px;font-size:14px;cursor:pointer;font-weight:700;}
+.qd-btn:hover{background:#388e3c;}
+.qd-fb{font-size:13px;font-weight:600;padding:6px 12px;border-radius:8px;display:none;margin-top:6px;}
+.qd-fb.ok{background:#c8e6c9;color:#1b5e20;display:block;}
+.qd-fb.no{background:#ffcdd2;color:#b71c1c;display:block;}
+
+/* ORDER MODAL */
+#modal{display:none;background:#fff;border:2px solid #ff6b35;border-radius:18px;padding:16px;margin-bottom:12px;}
+#modal.on{display:block;}
+.modal-cust{display:flex;align-items:flex-start;gap:12px;margin-bottom:10px;}
+.modal-av{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;}
+.modal-bubble{background:#fff8f0;border:1.5px solid #ffd4b0;border-radius:12px;padding:10px 14px;font-size:13px;color:#c0440a;line-height:1.55;flex:1;position:relative;}
+.modal-bubble::before{content:'';position:absolute;left:-10px;top:14px;border:6px solid transparent;border-right-color:#ffd4b0;}
+.modal-bubble::after{content:'';position:absolute;left:-8px;top:15px;border:5px solid transparent;border-right-color:#fff8f0;}
+.modal-vis{display:flex;align-items:center;gap:4px;flex-wrap:wrap;padding:10px;background:#fafafa;border-radius:12px;margin-bottom:10px;min-height:48px;}
+.mv-food{font-size:20px;}
+.mv-food.x{opacity:.18;text-decoration:line-through;}
+.mv-op{font-size:16px;font-weight:700;color:#ff6b35;margin:0 3px;}
+.mv-eq{font-size:16px;color:#888;margin:0 3px;}
+.ans-row{display:flex;align-items:center;gap:8px;}
+.ans-hint{font-size:13px;color:#aaa;}
+.ans-in{width:74px;text-align:center;font-size:24px;font-weight:700;padding:7px;border:2px solid #ffd4b0;border-radius:10px;background:#fff8f0;color:#c0440a;outline:none;}
+.ans-in:focus{border-color:#ff6b35;}
+.ans-in.ok{border-color:#4caf50;background:#f1fff3;color:#2e7d32;}
+.ans-in.no{border-color:#f44336;background:#fff1f0;color:#c62828;}
+.ok-btn{background:#ff6b35;color:#fff;border:none;border-radius:10px;padding:9px 20px;font-size:15px;cursor:pointer;font-weight:700;}
+.ok-btn:hover{background:#e85a25;}
+.ok-btn:disabled{background:#ccc;cursor:default;}
+.modal-fb{font-size:13px;font-weight:600;padding:7px 12px;border-radius:8px;display:none;margin-top:8px;}
+.modal-fb.ok{background:#e8f5e9;color:#2e7d32;display:block;}
+.modal-fb.no{background:#ffebee;color:#c62828;display:block;}
+.type-badge{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:8px;}
+.type-badge.add{background:#e3f2fd;color:#1565c0;}
+.type-badge.sub{background:#fce4ec;color:#880e4f;}
+.type-badge.two{background:#f3e5f5;color:#6a1b9a;}
+.close-row{display:flex;justify-content:flex-end;margin-top:8px;}
+.close-modal{background:#f5f5f5;border:1px solid #e0e0e0;border-radius:8px;padding:5px 14px;font-size:12px;cursor:pointer;color:#666;}
+
+/* NOTIFICATION */
+#notif{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#333;color:#fff;padding:8px 20px;border-radius:20px;font-size:13px;font-weight:600;display:none;z-index:100;pointer-events:none;}
+
+/* GAME OVER */
+#go-wrap{background:#fff8f0;border:2px solid #ffd4b0;border-radius:20px;padding:28px 20px;text-align:center;margin-top:12px;}
+.go-emoji{font-size:56px;margin-bottom:10px;}
+.go-title{font-size:24px;font-weight:700;color:#c0440a;margin-bottom:8px;}
+.go-score{font-size:20px;color:#e65100;margin-bottom:6px;}
+.go-stats{font-size:13px;color:#a0522d;margin-bottom:20px;line-height:1.9;}
+.go-back{background:#ff6b35;color:#fff;border:none;border-radius:14px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;width:100%;}
+.go-back:hover{background:#e85a25;}
+</style>
+</head>
+<body>
+<div id="notif"></div>
+<div id="app">
+
+<!-- MENU -->
+<div class="scr on" id="scr-menu">
+  <div id="menu-wrap">
+    <div class="m-logo">🍕</div>
+    <div class="m-title" id="m-title">Sihirli Pizza Restoranı</div>
+    <div class="m-sub" id="m-sub">Masaları doldur, siparişleri hesapla, restoranı yönet!</div>
+    <!-- <div class="lang-row">
+      <button class="lbtn on" onclick="setLang('tr')">Türkçe</button>
+      <button class="lbtn" onclick="setLang('de')">Deutsch</button>
+    </div> -->
+    <div class="diff-label" id="m-diff-label">Zorluk seç:</div>
+    <div class="diff-grid">
+      <div class="diff-card sel" id="dc0" onclick="selDiff(0)">
+        <div class="di">🧑‍🍳</div>
+        <div class="dn" id="dn0">Çırak</div>
+        <div class="dd" id="dd0">4 masa · 0–10 · Sabırlı</div>
+      </div>
+      <div class="diff-card" id="dc1" onclick="selDiff(1)">
+        <div class="di">👨‍🍳</div>
+        <div class="dn" id="dn1">Usta</div>
+        <div class="dd" id="dd1">6 masa · 0–20 · Aceleci</div>
+      </div>
+      <div class="diff-card" id="dc2" onclick="selDiff(2)">
+        <div class="di">⭐</div>
+        <div class="dn" id="dn2">Şef</div>
+        <div class="dd" id="dd2">8 masa · 0–30 · Sabırsız</div>
+      </div>
+    </div>
+    <button class="go-btn" onclick="startGame()" id="m-go">Restoranı Aç!</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="scr" id="scr-game">
+  <div id="hud">
+    <div class="hud-box score" id="hud-score">Puan: 0</div>
+    <div class="hud-box" id="hud-served">Servis: 0</div>
+    <div class="hud-box" id="hud-wrong">Hata: 0/3</div>
+    <div class="lives" id="lives"></div>
+  </div>
+  <div id="penalty-wrap">
+    <div id="penalty-label">⚠ Boş masa cezası</div>
+    <div id="penalty-bar"><div id="penalty-fill"></div></div>
+  </div>
+
+  <div id="q-decision">
+    <div class="qd-title" id="qd-title">Kapıda müşteriler bekliyor!</div>
+    <div class="qd-q" id="qd-q"></div>
+    <div class="qd-visual" id="qd-vis"></div>
+    <div class="qd-row">
+      <input class="qd-in" type="number" id="qd-in" min="0" max="30" placeholder="?"
+        onkeydown="if(event.key==='Enter')submitQD()">
+      <button class="qd-btn" onclick="submitQD()">✓</button>
+    </div>
+    <div class="qd-fb" id="qd-fb"></div>
+  </div>
+
+  <div id="modal">
+    <div id="m-type-badge" class="type-badge add">+ Toplama</div>
+    <div class="modal-cust">
+      <div class="modal-av" id="m-av"></div>
+      <div class="modal-bubble" id="m-bubble"></div>
+    </div>
+    <div class="modal-vis" id="m-vis"></div>
+    <div class="ans-row">
+      <span class="ans-hint">= ?</span>
+      <input class="ans-in" type="number" id="m-in" min="0" max="60" placeholder="?"
+        onkeydown="if(event.key==='Enter')submitOrder()"
+        oninput="document.getElementById('m-in').className='ans-in';document.getElementById('m-fb').className='modal-fb';">
+      <button class="ok-btn" id="m-ok" onclick="submitOrder()">✓</button>
+    </div>
+    <div class="modal-fb" id="m-fb"></div>
+    <div class="close-row">
+      <button class="close-modal" onclick="closeModal()" id="m-close">✕ Kapat</button>
+    </div>
+  </div>
+
+  <div id="floor" class="fl4"></div>
+
+  <div id="queue-wrap">
+    <div class="q-label" id="q-label">Bekleyenler — tıkla, boş masaya oturt</div>
+    <div id="queue-row"></div>
+  </div>
+</div>
+
+<!-- GAME OVER -->
+<div class="scr" id="scr-over">
+  <div id="go-wrap">
+    <div class="go-emoji" id="go-emoji">😢</div>
+    <div class="go-title" id="go-title">Restoran kapandı!</div>
+    <div class="go-score" id="go-score"></div>
+    <div class="go-stats" id="go-stats"></div>
+    <button class="go-back" onclick="showMenu()" id="go-back-btn">Ana Menüye Dön</button>
+  </div>
+</div>
+
+</div><!-- #app -->
+
+<script>
+/* ===================== CONFIG ===================== */
+var LANG = 'de', DIFF = 0;
+var score = 0, lives = 3, served = 0, wrongCount = 0, penaltyPct = 0;
+var tables = [], queue = [], activeIdx = -1, qdPending = null;
+var loops = [];
+var modalAnswered = false;
+
+var CFG = [
+  { tables:4, maxN:10, patience:120, queueMax:4, penRate:2.0, label:'fl4', penScore:4 },
+  { tables:6, maxN:20, patience:60, queueMax:5, penRate:3.5, label:'fl6', penScore:6 },
+  { tables:8, maxN:30, patience:30,  queueMax:6, penRate:5.0, label:'fl8', penScore:8 }
+];
+
+var CHARS = [
+  {icon:'👧', name:{tr:'Ayşe',    de:'Lena'},      bg:'#fff0f5'},
+  {icon:'👦', name:{tr:'Ali',     de:'Max'},       bg:'#f0f5ff'},
+  {icon:'👵', name:{tr:'Büyükanne',de:'Oma'},      bg:'#fff5e0'},
+  {icon:'👮', name:{tr:'Polis',   de:'Polizist'},  bg:'#e0f5ff'},
+  {icon:'👩‍🏫',name:{tr:'Öğretmen',de:'Lehrerin'}, bg:'#f0fff0'},
+  {icon:'👨‍🌾',name:{tr:'Çiftçi', de:'Bauer'},     bg:'#f5fff0'},
+  {icon:'👨‍⚕️',name:{tr:'Doktor', de:'Doktor'},    bg:'#f0f8ff'},
+  {icon:'👩‍🚒',name:{tr:'İtfaiyeci',de:'Feuerwehr'},bg:'#fff0e0'},
+  {icon:'🧒', name:{tr:'Mehmet', de:'Jonas'},      bg:'#f5f0ff'},
+  {icon:'👩', name:{tr:'Elif',   de:'Sophie'},     bg:'#fff0fa'},
+  {icon:'🧓', name:{tr:'Amca',   de:'Onkel'},      bg:'#f0faf5'},
+  {icon:'👩‍🦰',name:{tr:'Zeynep', de:'Emma'},       bg:'#fff5f0'}
+];
+
+/* ===================== TRANSLATIONS ===================== */
+var TX = {
+  tr: {
+    title:'Sihirli Pizza Restoranı',
+    sub:'Masaları doldur, siparişleri hesapla, restoranı yönet!',
+    diffLabel:'Zorluk seç:',
+    startBtn:'Restoranı Aç!',
+    dn:['Çırak','Usta','Şef'],
+    dd:['4 masa · 0–10 · Sabırlı','6 masa · 0–20 · Aceleci','8 masa · 0–30 · Sabırsız'],
+    scoreL:'Puan:', servedL:'Servis:', wrongL:'Hata:',
+    penLabel:'⚠ Boş masa cezası',
+    qLabel:'Bekleyenler — tıkla, boş masaya oturt',
+    qdTitle:'Kapıda müşteriler bekliyor!',
+    emptyLabel:'Boş masa', penaltyLbl:'−puan',
+    waitLabel:'Sipariş bekliyor…', angryLabel:'Sabırsız!',
+    doneLabel:'Servis tamam!', orderBtn:'Siparişi Al',
+    closeBtn:'✕ Kapat',
+    typeBadge:{add:'+ Toplama', sub:'− Çıkarma', two:'2 Adım'},
+    correct:['Aferin! 🎉','Süper! ⭐','Doğru! ✅','Mükemmel! 🌟','Harika! 🍕'],
+    wrong:'Yanlış! Doğrusu: ',
+    goTitle:'Restoran kapandı!',
+    goBack:'Ana Menüye Dön',
+    goScore: s => 'Toplam puan: ' + s,
+    goStats: (sv,w) => sv + ' sipariş teslim edildi\n' + w + ' yanlış cevap',
+    qa: (c,a,b) => c+', masaya '+a+' dilim pizza geldi. Garson '+b+' dilim daha getirdi. Kaç dilim var?',
+    qs: (c,a,b) => c+', masada '+a+' dilim pizza vardı. '+b+' dilim yendi. Kaç dilim kaldı?',
+    qt: (c,a,b,d) => c+', fırından '+a+' pizza çıktı. '+b+' tanesi dağıtıldı, sonra '+d+' tane daha geldi. Kaç pizza var?',
+    qdin: (tot,em) => 'Dışarıda '+tot+' müşteri bekliyor. Restoranınızda '+em+' boş masa var. Kaç müşteri içeri alınabilir?',
+  },
+  de: {
+    title:'Die Zauber-Pizzeria',
+    sub:'Fülle die Tische, rechne die Bestellungen, führe das Restaurant!',
+    diffLabel:'Schwierigkeitsstufe:',
+    startBtn:'Restaurant öffnen!',
+    dn:['Lehrling','Chefkoch','Meisterkoch'],
+    dd:['4 Tische · 0–10 · Geduldig','6 Tische · 0–20 · Ungeduldig','8 Tische · 0–30 · Sehr ungeduldig'],
+    scoreL:'Punkte:', servedL:'Bedient:', wrongL:'Fehler:',
+    penLabel:'⚠ Strafe für leere Tische',
+    qLabel:'Wartende Gäste — klicken, an freien Tisch setzen',
+    qdTitle:'Gäste warten draußen!',
+    emptyLabel:'Leerer Tisch', penaltyLbl:'−Punkte',
+    waitLabel:'Bestellung erwartet…', angryLabel:'Ungeduldig!',
+    doneLabel:'Fertig!', orderBtn:'Bestellung aufnehmen',
+    closeBtn:'✕ Schließen',
+    typeBadge:{add:'+ Addition', sub:'− Subtraktion', two:'2 Schritte'},
+    correct:['Super! 🎉','Toll! ⭐','Richtig! ✅','Ausgezeichnet! 🌟','Prima! 🍕'],
+    wrong:'Falsch! Richtig ist: ',
+    goTitle:'Restaurant geschlossen!',
+    goBack:'Zum Hauptmenü',
+    goScore: s => 'Gesamtpunkte: ' + s,
+    goStats: (sv,w) => sv + ' Bestellungen bedient\n' + w + ' Fehler',
+    qa: (c,a,b) => c+', am Tisch liegen '+a+' Pizzastücke. Der Kellner bringt noch '+b+'. Wie viele Stücke gibt es jetzt?',
+    qs: (c,a,b) => c+', auf dem Tisch lagen '+a+' Pizzastücke. '+b+' wurden gegessen. Wie viele sind noch übrig?',
+    qt: (c,a,b,d) => c+', aus dem Ofen kamen '+a+' Pizzas. '+b+' wurden verteilt, dann kamen '+d+' neue. Wie viele Pizzas gibt es?',
+    qdin: (tot,em) => 'Draußen warten '+tot+' Gäste. Sie haben '+em+' freie Tische. Wie viele Gäste können reinkommen?',
+  }
+};
+
+/* ===================== UTILS ===================== */
+function t(k){ return TX[LANG][k]; }
+function rand(a,b){ return Math.floor(Math.random()*(b-a+1))+a; }
+function randChar(){ return CHARS[rand(0,CHARS.length-1)]; }
+function pick(arr){ return arr[rand(0,arr.length-1)]; }
+
+function showNotif(msg, color){
+  var n = document.getElementById('notif');
+  n.textContent = msg;
+  n.style.background = color || '#333';
+  n.style.display = 'block';
+  clearTimeout(showNotif._t);
+  showNotif._t = setTimeout(()=>{ n.style.display='none'; }, 1600);
+}
+
+/* ===================== LANG / DIFF ===================== */
+function setLang(l){
+  LANG = l;
+  document.querySelectorAll('.lbtn').forEach(b=>{
+    b.classList.toggle('on',
+      (l==='tr' && b.textContent==='Türkçe') ||
+      (l==='de' && b.textContent==='Deutsch'));
+  });
+  applyMenuText();
+}
+
+function applyMenuText(){
+  var tx = TX[LANG];
+  document.getElementById('m-title').textContent = tx.title;
+  document.getElementById('m-sub').textContent = tx.sub;
+  document.getElementById('m-diff-label').textContent = tx.diffLabel;
+  document.getElementById('m-go').textContent = tx.startBtn;
+  for(var i=0;i<3;i++){
+    document.getElementById('dn'+i).textContent = tx.dn[i];
+    document.getElementById('dd'+i).textContent = tx.dd[i];
+  }
+}
+
+function selDiff(d){
+  DIFF = d;
+  document.querySelectorAll('.diff-card').forEach((c,i)=>c.classList.toggle('sel',i===d));
+}
+
+/* ===================== QUESTION GENERATOR ===================== */
+function makeOrder(charName){
+  var cfg = CFG[DIFF], mx = cfg.maxN;
+  var typePool = DIFF===0 ? ['add','add','sub'] : DIFF===1 ? ['add','sub','sub','add'] : ['add','sub','two','sub','two'];
+  var tp = pick(typePool);
+  var q = { type: tp };
+
+  if(tp === 'add'){
+    var a = rand(1, Math.floor(mx*0.7));
+    var b = rand(1, Math.min(mx - a, Math.floor(mx*0.5)));
+    q.a=a; q.b=b; q.answer=a+b;
+    q.text = TX[LANG].qa(charName, a, b);
+    q.visual = { op:'+', a, b };
+  } else if(tp === 'sub'){
+    var a = rand(Math.max(3, Math.floor(mx*0.25)), mx);
+    var b = rand(1, Math.min(a-1, Math.floor(mx*0.6)));
+    q.a=a; q.b=b; q.answer=a-b;
+    q.text = TX[LANG].qs(charName, a, b);
+    q.visual = { op:'-', a, b };
+  } else {
+    var a = rand(5, Math.min(mx, 18));
+    var b = rand(1, Math.min(a-1, 10));
+    var d = rand(1, Math.min(30-(a-b), 12));
+    q.a=a; q.b=b; q.d=d; q.answer=(a-b)+d;
+    q.text = TX[LANG].qt(charName, a, b, d);
+    q.visual = { op:'two', a, b, d };
+  }
+  return q;
+}
+
+/* ===================== GAME START ===================== */
+function startGame(){
+  var cfg = CFG[DIFF];
+  score=0; lives=3; served=0; wrongCount=0; penaltyPct=0;
+  tables=[]; queue=[]; activeIdx=-1; qdPending=null; modalAnswered=false;
+
+  for(var i=0;i<cfg.tables;i++) tables.push(emptyTable());
+
+  show('scr-game');
+  document.getElementById('floor').className = 'fl'+cfg.tables; // will be set below
+  // set proper grid class
+  var flEl = document.getElementById('floor');
+  flEl.className = cfg.label;
+
+  renderHUD();
+  renderFloor();
+  renderQueue();
+
+  // pre-seat some customers
+  var preSeat = Math.min(Math.floor(cfg.tables*0.6), cfg.tables);
+  for(var i=0;i<preSeat;i++) seatRandom();
+  renderFloor();
+
+  // spawn a few queue members
+  for(var i=0;i<2;i++) spawnOne();
+  renderQueue();
+
+  clearLoops();
+  loops.push(setInterval(tickTimers, 400));
+  loops.push(setInterval(applyPenalty, 1000));
+  loops.push(setInterval(spawnOne, 4500 - DIFF*800));
+  loops.push(setInterval(maybeQD, 7000 - DIFF*1000));
+}
+
+function emptyTable(){
+  return { state:'empty', char:null, order:null, timerPct:100, timerFull: CFG[DIFF].patience };
+}
+
+/* ===================== TICK ===================== */
+function tickTimers(){
+  tables.forEach((tb,i)=>{
+    if(tb.state==='waiting'||tb.state==='angry'){
+      var dec = (100 / tb.timerFull) * (400/1000) * 1.6;
+      tb.timerPct = Math.max(0, tb.timerPct - dec);
+      if(tb.timerPct <= 0){
+        customerLeave(i, true);
+        return;
+      }
+      tb.state = tb.timerPct < 28 ? 'angry' : 'waiting';
+    }
+  });
+  renderFloor();
+}
+
+function applyPenalty(){
+  var empty = tables.filter(tb=>tb.state==='empty').length;
+  if(empty > 0){
+    var cfg = CFG[DIFF];
+    penaltyPct = Math.min(100, penaltyPct + cfg.penRate * empty * 0.35);
+    if(penaltyPct >= 100){
+      penaltyPct = 0;
+      score = Math.max(0, score - cfg.penScore);
+      renderHUD();
+      showNotif('Boş masa! −'+cfg.penScore+' puan', '#e53935');
+    }
+  } else {
+    penaltyPct = Math.max(0, penaltyPct - 3);
+  }
+  document.getElementById('penalty-fill').style.width = Math.round(penaltyPct)+'%';
+}
+
+/* ===================== QUEUE ===================== */
+function spawnOne(){
+  var cfg = CFG[DIFF];
+  if(queue.length >= cfg.queueMax) return;
+  var ch = randChar();
+  queue.push({ char:ch, id: Date.now()+Math.random() });
+  renderQueue();
+}
+
+function maybeQD(){
+  if(qdPending) return;
+  var empty = tables.filter(tb=>tb.state==='empty').length;
+  if(empty === 0 || queue.length === 0) return;
+  triggerQD();
+}
+
+function triggerQD(){
+  var empty = tables.filter(tb=>tb.state==='empty').length;
+  if(empty===0||queue.length===0) return;
+  var inQ = queue.length;
+  var ans = Math.min(empty, inQ);
+  qdPending = { inQ, empty, answer:ans };
+
+  document.getElementById('qd-title').textContent = t('qdTitle');
+  document.getElementById('qd-q').textContent = TX[LANG].qdin(inQ, empty);
+
+  var vis = document.getElementById('qd-vis');
+  vis.innerHTML = '';
+  var show = Math.min(inQ, 10);
+  for(var i=0;i<show;i++) vis.innerHTML += '<span style="font-size:18px">🧍</span>';
+  if(inQ>10) vis.innerHTML += '<span style="font-size:12px;color:#aaa;margin-left:4px">+' + (inQ-10) + '</span>';
+  vis.innerHTML += '<span style="font-size:16px;font-weight:700;color:#2e7d32;margin:0 6px">→</span>';
+  var showE = Math.min(empty,8);
+  for(var i=0;i<showE;i++) vis.innerHTML += '<span style="font-size:18px">🪑</span>';
+
+  var fb = document.getElementById('qd-fb');
+  fb.className='qd-fb'; fb.textContent='';
+  document.getElementById('qd-in').value='';
+  document.getElementById('q-decision').classList.add('on');
+  document.getElementById('qd-in').focus();
+}
+
+function submitQD(){
+  if(!qdPending) return;
+  var val = parseInt(document.getElementById('qd-in').value);
+  if(isNaN(val)) return;
+  var fb = document.getElementById('qd-fb');
+  var correct = qdPending.answer;
+
+  if(val === correct){
+    fb.className='qd-fb ok';
+    fb.textContent = pick(t('correct')) + ' +10';
+    score += 10; renderHUD();
+    for(var i=0;i<correct;i++) seatFromQueue();
+    setTimeout(()=>{
+      document.getElementById('q-decision').classList.remove('on');
+      qdPending = null;
+    },1300);
+  } else {
+    fb.className='qd-fb no';
+    fb.textContent = t('wrong') + correct;
+    loseLife();
+    setTimeout(()=>{
+      document.getElementById('q-decision').classList.remove('on');
+      qdPending = null;
+    },1600);
+  }
+}
+
+/* ===================== SEATING ===================== */
+function seatRandom(){
+  var idx = tables.findIndex(tb=>tb.state==='empty');
+  if(idx===-1) return;
+  var ch = randChar();
+  var ord = makeOrder(ch.name[LANG]);
+  tables[idx] = { state:'waiting', char:ch, order:ord, timerPct:100, timerFull:CFG[DIFF].patience };
+}
+
+function seatFromQueue(){
+  var idx = tables.findIndex(tb=>tb.state==='empty');
+  if(idx===-1||queue.length===0) return;
+  var person = queue.shift();
+  var ord = makeOrder(person.char.name[LANG]);
+  tables[idx] = { state:'waiting', char:person.char, order:ord, timerPct:100, timerFull:CFG[DIFF].patience };
+  renderQueue();
+  renderFloor();
+}
+
+function seatOneFromQueue(qIdx){
+  var tIdx = tables.findIndex(tb=>tb.state==='empty');
+  if(tIdx===-1){ showNotif('Boş masa yok!','#e53935'); return; }
+  var person = queue.splice(qIdx,1)[0];
+  var ord = makeOrder(person.char.name[LANG]);
+  tables[tIdx] = { state:'waiting', char:person.char, order:ord, timerPct:100, timerFull:CFG[DIFF].patience };
+  renderQueue();
+  renderFloor();
+}
+
+function customerLeave(idx, angry){
+  if(angry){
+    score = Math.max(0, score - 10);
+    renderHUD();
+    showNotif(TX[LANG].angryLabel + ' −10', '#e53935');
+  }
+  tables[idx] = emptyTable();
+  if(activeIdx === idx) closeModal();
+  renderFloor();
+}
+
+/* ===================== ORDER MODAL ===================== */
+function openOrder(idx){
+  var tb = tables[idx];
+  if(!tb || tb.state==='empty' || tb.state==='answered') return;
+  activeIdx = idx;
+  modalAnswered = false;
+
+  var ch = tb.char, ord = tb.order;
+  var tx = TX[LANG];
+
+  // badge
+  var badge = document.getElementById('m-type-badge');
+  badge.className = 'type-badge ' + (ord.type==='add'?'add':ord.type==='sub'?'sub':'two');
+  badge.textContent = tx.typeBadge[ord.type];
+
+  document.getElementById('m-av').textContent = ch.icon;
+  document.getElementById('m-av').style.background = ch.bg;
+  document.getElementById('m-bubble').textContent = ord.text;
+  document.getElementById('m-close').textContent = tx.closeBtn;
+
+  // visual
+  var vis = document.getElementById('m-vis');
+  vis.innerHTML = '';
+  var v = ord.visual, MAX=16;
+  if(v.op==='+'){
+    var sa = Math.min(v.a, MAX);
+    for(var i=0;i<sa;i++) vis.innerHTML += '<span class="mv-food">🍕</span>';
+    if(v.a>MAX) vis.innerHTML += '<span style="font-size:11px;color:#aaa">+' + (v.a-MAX) + '</span>';
+    vis.innerHTML += '<span class="mv-op">+</span>';
+    for(var i=0;i<v.b;i++) vis.innerHTML += '<span class="mv-food">🍕</span>';
+    vis.innerHTML += '<span class="mv-eq">=?</span>';
+  } else if(v.op==='-'){
+    var tot = Math.min(v.a, MAX);
+    for(var i=0;i<tot;i++) vis.innerHTML += '<span class="mv-food'+(i<Math.min(v.b,MAX)?' x':'')+'">🍕</span>';
+    if(v.a>MAX) vis.innerHTML += '<span style="font-size:11px;color:#aaa">… '+v.a+'</span>';
+    vis.innerHTML += '<span class="mv-eq">=?</span>';
+  } else {
+    var sa = Math.min(v.a, MAX);
+    for(var i=0;i<sa;i++) vis.innerHTML += '<span class="mv-food">🍕</span>';
+    vis.innerHTML += '<span class="mv-op">−'+v.b+'</span><span class="mv-op">+'+v.d+'</span><span class="mv-eq">=?</span>';
+  }
+
+  var inp = document.getElementById('m-in');
+  inp.value=''; inp.className='ans-in';
+  document.getElementById('m-fb').className='modal-fb';
+  document.getElementById('m-ok').disabled=false;
+  document.getElementById('modal').classList.add('on');
+  inp.focus();
+}
+
+function submitOrder(){
+  if(modalAnswered) return;
+  var idx = activeIdx;
+  if(idx===-1) return;
+  var tb = tables[idx];
+  var val = parseInt(document.getElementById('m-in').value);
+  if(isNaN(val)) return;
+  modalAnswered = true;
+  document.getElementById('m-ok').disabled = true;
+
+  var fb = document.getElementById('m-fb');
+  var inp = document.getElementById('m-in');
+
+  if(val === tb.order.answer){
+    inp.className = 'ans-in ok';
+    fb.className = 'modal-fb ok';
+    fb.textContent = pick(t('correct')) + ' +15';
+    score += 15; served++;
+    renderHUD();
+    tables[idx].state = 'answered';
+    renderFloor();
+    setTimeout(()=>{ closeModal(); customerLeave(idx,false); },1200);
+  } else {
+    inp.className = 'ans-in no';
+    fb.className = 'modal-fb no';
+    fb.textContent = t('wrong') + tb.order.answer;
+    loseLife();
+    setTimeout(()=>{
+      if(lives > 0){
+        modalAnswered = false;
+        document.getElementById('m-ok').disabled = false;
+        inp.value=''; inp.className='ans-in';
+        fb.className='modal-fb';
+        inp.focus();
+      }
+    }, 1400);
+  }
+}
+
+function closeModal(){
+  document.getElementById('modal').classList.remove('on');
+  activeIdx = -1;
+}
+
+/* ===================== LIVES / GAME OVER ===================== */
+function loseLife(){
+  wrongCount++;
+  lives = Math.max(0, lives-1);
+  renderHUD();
+  showNotif('−1 can ❤️', '#e53935');
+  if(lives<=0) setTimeout(gameOver, 900);
+}
+
+function gameOver(){
+  clearLoops();
+  var tx = TX[LANG];
+  document.getElementById('go-emoji').textContent = score>=150?'🏆':score>=70?'😤':'😢';
+  document.getElementById('go-title').textContent = tx.goTitle;
+  document.getElementById('go-score').textContent = tx.goScore(score);
+  document.getElementById('go-stats').textContent = tx.goStats(served, wrongCount);
+  document.getElementById('go-back-btn').textContent = tx.goBack;
+  show('scr-over');
+}
+
+/* ===================== RENDER ===================== */
+function renderHUD(){
+  var tx = TX[LANG];
+  document.getElementById('hud-score').textContent = tx.scoreL + ' ' + score;
+  document.getElementById('hud-served').textContent = tx.servedL + ' ' + served;
+  document.getElementById('hud-wrong').textContent = tx.wrongL + ' ' + wrongCount + '/3';
+  document.getElementById('penalty-label').textContent = tx.penLabel;
+  var lv = document.getElementById('lives');
+  lv.innerHTML = '';
+  for(var i=0;i<3;i++) lv.innerHTML += '<span class="heart'+(i>=lives?' lost':'')+'">❤️</span>';
+}
+
+function renderFloor(){
+  var floor = document.getElementById('floor');
+  floor.innerHTML = '';
+  var tx = TX[LANG];
+  tables.forEach((tb,i)=>{
+    var d = document.createElement('div');
+    d.className = 'table-card ' + tb.state;
+    d.innerHTML = '<div class="t-num">Masa '+(i+1)+'</div>';
+
+    if(tb.state==='empty'){
+      d.innerHTML += '<div class="t-char" style="opacity:.25;margin-top:8px">🪑</div>';
+      d.innerHTML += '<div class="t-empty-label">'+tx.emptyLabel+'</div>';
+      d.innerHTML += '<div class="t-penalty">'+tx.penaltyLbl+'</div>';
+    } else if(tb.state==='answered'){
+      d.innerHTML += '<div class="t-char" style="margin-top:6px">'+tb.char.icon+'</div>';
+      d.innerHTML += '<div class="t-name">'+tb.char.name[LANG]+'</div>';
+      d.innerHTML += '<div class="t-done">✅</div>';
+    } else {
+      var pct = Math.max(0, Math.round(tb.timerPct));
+      var col = pct>60?'#4caf50':pct>30?'#ff9800':'#f44336';
+      if(tb.state==='angry') d.innerHTML += '<div class="t-angry-badge">'+tx.angryLabel+'</div>';
+      d.innerHTML += '<div class="t-char">'+tb.char.icon+'</div>';
+      d.innerHTML += '<div class="t-name">'+tb.char.name[LANG]+'</div>';
+      var shortQ = tb.order.text.length > 52 ? tb.order.text.substring(0,52)+'…' : tb.order.text;
+      d.innerHTML += '<div class="t-q">'+shortQ+'</div>';
+      d.innerHTML += '<div class="t-timer"><div class="t-timer-fill" style="width:'+pct+'%;background:'+col+'"></div></div>';
+      d.innerHTML += '<button class="t-btn" onclick="openOrder('+i+')">'+tx.orderBtn+'</button>';
+      d.onclick = function(idx){ return function(e){ if(e.target.tagName!=='BUTTON') openOrder(idx); }; }(i);
+    }
+    floor.appendChild(d);
+  });
+}
+
+function renderQueue(){
+  var row = document.getElementById('queue-row');
+  var label = document.getElementById('q-label');
+  label.textContent = TX[LANG].qLabel;
+  row.innerHTML = '';
+  if(queue.length===0){
+    row.innerHTML = '<span style="font-size:12px;color:#ccc;font-style:italic">—</span>';
+    return;
+  }
+  queue.forEach((p,i)=>{
+    var d = document.createElement('div');
+    d.className = 'q-person';
+    d.innerHTML = '<span class="qi">'+p.char.icon+'</span><span>'+p.char.name[LANG]+'</span>';
+    d.onclick = (function(idx){ return function(){ seatOneFromQueue(idx); }; })(i);
+    row.appendChild(d);
+  });
+}
+
+/* ===================== MISC ===================== */
+function clearLoops(){ loops.forEach(clearInterval); loops=[]; }
+function show(id){ document.querySelectorAll('.scr').forEach(s=>s.classList.remove('on')); document.getElementById(id).classList.add('on'); }
+function showMenu(){ clearLoops(); show('scr-menu'); applyMenuText(); }
+
+applyMenuText();
+selDiff(0);
+</script>
+</body>
+</html>
